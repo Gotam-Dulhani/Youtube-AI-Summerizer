@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube AI Summarizer Pro",
+  "version": "2.0.0",
+  "description": "Advanced AI-powered YouTube video summarizer with multiple summary formats and enhanced accuracy",
+  "author": "AI Video Tools",
+  
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.youtu.be/*",
+    "*://*.google.com/*",
+    "https://api-inference.huggingface.co/*",
+    "https://cors.bridged.cc/*",
+    "https://api.codetabs.com/*",
+    "https://yt.lemnoslife.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://*.youtube.com https://*.youtu.be https://*.google.com https://cors.bridged.cc https://api.codetabs.com https://yt.lemnoslife.com https://api-inference.huggingface.co https://www.googleapis.com"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube AI Summarizer"
+  },
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "minimum_chrome_version": "88"
+}
